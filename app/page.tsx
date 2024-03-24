@@ -1,18 +1,25 @@
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import { getSession, login, logout } from "@/lib";
 
 export default async function Page() {
   const session = await getSession();
+  if (session) {
+    redirect("/home", RedirectType.replace);
+  }
   return (
     <section>
       <form
         action={async (formData) => {
           "use server";
-          await login(formData);
-          redirect("/");
+          const isCorrect = await login(formData);
+          if (isCorrect) {
+            redirect("/home", RedirectType.replace);
+          } else {
+            redirect("/wrong", RedirectType.replace);
+          }
         }}
       >
-        <input type="email" placeholder="Email" />
+        <input type="email" placeholder="Email" name="email" />
         <br />
         <button type="submit">Login</button>
       </form>

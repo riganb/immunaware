@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const secretKey = "secret";
+const secretKey = "immunaware";
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
@@ -25,12 +25,18 @@ export async function login(formData: FormData) {
 
   const user = { email: formData.get("email"), name: "John" };
 
+  if (user.email !== "hey@hey.hey") {
+    return false;
+  }
+
   // Create the session
-  const expires = new Date(Date.now() + 10 * 1000);
+  const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ user, expires });
 
   // Save the session in a cookie
   cookies().set("session", session, { expires, httpOnly: true });
+
+  return true;
 }
 
 export async function logout() {
@@ -40,7 +46,9 @@ export async function logout() {
 
 export async function getSession() {
   const session = cookies().get("session")?.value;
-  if (!session) return null;
+  if (!session) {
+    return null;
+  }
   return await decrypt(session);
 }
 
@@ -50,7 +58,7 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 10 * 1000);
+  parsed.expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",
