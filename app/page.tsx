@@ -1,5 +1,6 @@
 import { redirect, RedirectType } from "next/navigation";
 import { getSession, login, logout } from "@/lib";
+import Link from "next/link";
 
 export default async function Page() {
   const session = await getSession();
@@ -52,6 +53,11 @@ export default async function Page() {
             Login
           </button>
         </form>
+        <Link href="/patient/login">
+          <button className="text-xl mt-5 bg-black text-white hover:bg-white hover:text-black shadow-2xl hover:shadow-black rounded-full p-3 px-20">
+            Login as User
+          </button>
+        </Link>
       </div>
     </section>
   );

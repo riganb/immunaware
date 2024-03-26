@@ -74,7 +74,7 @@ export type Vaccine = {
 
 export const VaccinePropsList: (keyof Vaccine)[] = ["vid", "name", "manufacturer", "type", "dosage"];
 
-export const PropsList: Record<string, string[]> = {
+export const PropsList: Record<Property, string[]> = {
 	"centers": CenterPropsList,
 	"doctors": DoctorPropsList,
 	"patients": PatientPropsList,
@@ -91,4 +91,9 @@ export type OptionsDataForRecord = {
 
 export type OptionsDataForDoctor = {
 	centers: Center[]
+}
+
+export type UserHistoryData = {
+	name: string;
+	history: VaccinationRecord[];
 }
