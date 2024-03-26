@@ -37,7 +37,7 @@ export default async function Home() {
             property="about"
             value="4"
             isAbout={true}
-            aboutText="Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087)"
+            aboutText="Nidhi R M (1JS21IS064), Sanjana G (1JS21IS095), Sneha S (1JS21IS108), Pawan K R (1JS21IS068)"
           />
         </div>
       </>

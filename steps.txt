@@ -1,0 +1,12 @@
+Open the Folder in VS Code
+Open the terminal
+
+Run this command, only once:
+npm i
+Make sure node_modules folder is created after running the command
+
+Run this command to create database:
+node create-db.js
+
+Run this command to run the project:
+npm run dev
