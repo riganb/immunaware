@@ -10,12 +10,13 @@ export type Property = (keyof Counts);
 
 export const PROPERTIES: Property[] = ["records", "patients", "doctors", "centers", "vaccines"];
 
-export const PropertyColours: Record<Property, string> = {
+export const PropertyColours: Record<Property | "about", string> = {
 	centers: "green",
 	doctors: "blue",
 	patients: "purple",
 	records: "red",
 	vaccines: "amber",
+	about: "black"
 };
 
 export function toTitleCase(text: string): string {

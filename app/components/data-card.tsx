@@ -1,14 +1,19 @@
 "use client";
 
 import { Property, PropertyColours, toTitleCase } from "@/common";
-import { redirect, useRouter } from "next/navigation";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const DataCard = ({
   property,
   value,
+  isAbout = false,
+  aboutText = "",
 }: {
-  property: Property;
+  property: Property | "about";
   value: string;
+  isAbout?: boolean;
+  aboutText?: string;
 }) => {
   const router = useRouter();
   const colour = PropertyColours[property];
@@ -18,9 +23,15 @@ const DataCard = ({
   const addNew = () => {
     router.push(`/home/add/${property}`);
   };
+  const signOut = async () => {
+    await axios.get("/api/logout");
+    router.replace("/");
+  };
   return (
     <div
-      className={`group h-[177px] border-2 border-${colour}-700 hover:bg-${colour}-700 p-3 rounded-xl shadow-lg shadow-${colour}-700 hover:shadow-gray-500 flex flex-row gap-3 m-2 items-center`}
+      className={`group h-[177px] border-2 border-${colour}-700 hover:bg-${colour}-700 p-3 rounded-xl shadow-lg shadow-${colour}-700 hover:shadow-gray-500 flex flex-row gap-3 m-2 items-center ${
+        isAbout && "shadow-black hover:bg-black border-black"
+      }`}
     >
       <div
         className={`text-${colour}-700 h-full group-hover:text-white flex items-end text-[180px] font-extrabold`}
@@ -29,23 +40,36 @@ const DataCard = ({
       </div>
       <div className="flex flex-col justify-between h-full">
         <div
-          className={`text-2xl text text-${colour}-700 group-hover:text-white font-bold`}
+          className={`text text-${colour}-700 group-hover:text-white font-semibold ${
+            isAbout ? "text-md" : "font-bold"
+          }`}
         >
-          {toTitleCase(property)}
+          {isAbout ? aboutText : toTitleCase(property)}
         </div>
         <div className="flex flex-row justify-start gap-7">
-          <div
-            className={`bg-${colour}-700 group-hover:bg-white text-lg px-5 py-2 rounded-lg hover:text-${colour}-700 shadow-md font-semibold hover:shadow-white`}
-            onClick={viewList}
-          >
-            View List
-          </div>
-          <div
-            className={`bg-${colour}-700 group-hover:bg-white text-lg px-5 py-2 rounded-lg hover:text-${colour}-700 shadow-md font-semibold hover:shadow-white`}
-            onClick={addNew}
-          >
-            Add New
-          </div>
+          {isAbout ? (
+            <div
+              className={`bg-black text-white group-hover:bg-white text-lg px-5 py-2 rounded-lg hover:text-black shadow-md font-semibold hover:shadow-white group-hover:text-black`}
+              onClick={signOut}
+            >
+              Sign Out
+            </div>
+          ) : (
+            <>
+              <div
+                className={`bg-${colour}-700 group-hover:bg-white text-lg px-5 py-2 rounded-lg hover:text-${colour}-700 shadow-md font-semibold hover:shadow-white`}
+                onClick={viewList}
+              >
+                View List
+              </div>
+              <div
+                className={`bg-${colour}-700 group-hover:bg-white text-lg px-5 py-2 rounded-lg hover:text-${colour}-700 shadow-md font-semibold hover:shadow-white`}
+                onClick={addNew}
+              >
+                Add New
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -22,6 +22,21 @@ module.exports = {
     {
       pattern: /^text-(red|green|blue|purple|amber)-700$/,
       variants: ["hover", "group-hover"]
+    },
+    {
+      pattern: /^border-black$/
+    },
+    {
+      pattern: /^bg-black$/,
+      variants: ["hover"]
+    },
+    {
+      pattern: /^shadow-black$/,
+      variants: ["hover"]
+    },
+    {
+      pattern: /^text-black$/,
+      variants: ["hover", "group-hover"]
     }
   ]
 }

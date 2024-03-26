@@ -11,7 +11,6 @@ export default async function Home() {
   } else {
     const count: Counts = (await axios.get("http://localhost:3000/api/count"))
       .data.count;
-    console.log("counts::", count);
     return (
       <>
         <div className="text-2xl font-semibold">
@@ -34,6 +33,12 @@ export default async function Home() {
               value={`${count[property] ?? "Loading.."}`}
             />
           ))}
+          <DataCard
+            property="about"
+            value="4"
+            isAbout={true}
+            aboutText="Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087), Rigan Burnwal (1JS20IS087)"
+          />
         </div>
       </>
     );
