@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { Database, open } from "sqlite"
 import sqlite3 from "sqlite3";
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from "./common";
 
 const secretKey = "immunaware";
 const key = new TextEncoder().encode(secretKey);
@@ -39,8 +40,9 @@ export async function login(formData: FormData) {
   // Verify credentials && get the user
 
   const user = { email: formData.get("email"), name: "John" };
+  const password = formData.get("password");
 
-  if (user.email !== "hey@hey.hey") {
+  if (user.email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
     return false;
   }
 

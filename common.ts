@@ -1,3 +1,6 @@
+export const ADMIN_EMAIL = "admin@immunaware.com";
+export const ADMIN_PASSWORD = "admin"
+
 export type Counts = {
 	centers?: Number;
 	doctors?: Number;

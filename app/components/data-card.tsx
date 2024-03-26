@@ -41,7 +41,7 @@ const DataCard = ({
       <div className="flex flex-col justify-between h-full">
         <div
           className={`text text-${colour}-700 group-hover:text-white font-semibold ${
-            isAbout ? "text-md" : "font-bold"
+            isAbout ? "text-md" : "font-bold text-2xl"
           }`}
         >
           {isAbout ? aboutText : toTitleCase(property)}

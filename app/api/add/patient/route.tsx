@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const data: Patient = await req.json();
 
   await db.run(
-    "INSERT INTO patient (aadhar, name, email, yob) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO patient (aadhar, name, email, yob) VALUES (?, ?, ?, ?)",
     [data.aadhar, data.name, data.email, data.yob]
   );
 

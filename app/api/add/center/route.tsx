@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const data: Center = await req.json();
 
   await db.run(
-    "INSERT INTO center (cid, name, location, capacity) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO center (cid, name, location, capacity) VALUES (?, ?, ?, ?)",
     [data.cid, data.name, data.location, data.capacity]
   );
 

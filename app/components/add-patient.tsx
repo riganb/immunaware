@@ -21,6 +21,7 @@ export default function AddPatient() {
   const goBack = () => router.back();
 
   const submitHandler = async () => {
+    console.log(slug, data);
     await axios.post(`http://localhost:3000/api/add/${slug}`, data);
     router.replace(`/home/view/${slugWithS}`);
   };
