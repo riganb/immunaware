@@ -1,15 +1,30 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { Database, open } from "sqlite"
+import sqlite3 from "sqlite3";
 
 const secretKey = "immunaware";
 const key = new TextEncoder().encode(secretKey);
+
+export async function loadDB() {
+  const db = await open({
+    filename: "./data.db",
+    driver: sqlite3.Database
+  });
+  return db;
+}
+
+export async function offLoadDB(db: Database<sqlite3.Database, sqlite3.Statement>) {
+  db.run("COMMIT");
+  db.close();
+}
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("30 days from now")
     .sign(key);
 }
 
