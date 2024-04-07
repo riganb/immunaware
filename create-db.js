@@ -181,6 +181,24 @@ db.serialize(() => {
 			}
 		});
 	});
+
+	const createTriggerSql = `
+    CREATE TRIGGER IF NOT EXISTS delete_doctor_trigger
+    AFTER DELETE ON doctor
+    FOR EACH ROW
+    BEGIN
+        UPDATE record
+        SET did = NULL
+        WHERE did = OLD.did;
+    END;`;
+
+	db.run(createTriggerSql, (err) => {
+		if (err) {
+			console.error("Error creating trigger:", err);
+		} else {
+			console.log("Trigger created successfully.");
+		}
+	});
 });
 
 // Close the database connection
