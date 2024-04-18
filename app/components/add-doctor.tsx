@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  API_URL,
   Doctor,
   OptionsDataForDoctor,
   PropertyColours,
@@ -31,7 +32,7 @@ export default function AddDoctor() {
   useEffect(() => {
     const fn = async () => {
       const requestData: OptionsDataForDoctor = (
-        await axios.get("http://localhost:3000/api/options/doctors")
+        await axios.get(`${API_URL}/api/options/doctors`)
       ).data.data;
       console.log(requestData);
       setOptionsData(requestData);
@@ -46,7 +47,7 @@ export default function AddDoctor() {
   const goBack = () => router.back();
 
   const submitHandler = async () => {
-    await axios.post(`http://localhost:3000/api/add/${slug}`, data);
+    await axios.post(`${API_URL}/api/add/${slug}`, data);
     router.replace(`/home/view/${slugWithS}`);
   };
 

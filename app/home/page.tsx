@@ -1,7 +1,7 @@
 import { getSession } from "@/lib";
 import { redirect, RedirectType } from "next/navigation";
 import axios from "axios";
-import { Counts, PROPERTIES, Property } from "@/common";
+import { API_URL, Counts, PROPERTIES, Property } from "@/common";
 import DataCard from "../components/data-card";
 
 export default async function Home() {
@@ -9,8 +9,7 @@ export default async function Home() {
   if (!session) {
     redirect("/", RedirectType.replace);
   } else {
-    const count: Counts = (await axios.get("http://localhost:3000/api/count"))
-      .data.count;
+    const count: Counts = (await axios.get(`${API_URL}/api/count`)).data.count;
     return (
       <>
         <div className="text-2xl font-semibold">

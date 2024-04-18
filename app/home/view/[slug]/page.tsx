@@ -6,6 +6,7 @@ import {
   Property,
   PropertyColours,
   toTitleCase,
+  API_URL,
 } from "@/common";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -20,15 +21,14 @@ export default function Page({ params }: { params: { slug: Property } }) {
 
   const deleteDoctor = (did: string) => async () => {
     if (params.slug !== "doctors") return;
-    await axios.get(`http://localhost:3000/api/deletedoc/${did}`);
+    await axios.get(`${API_URL}/api/deletedoc/${did}`);
     router.refresh();
   };
 
   useEffect(() => {
     const fn = async () => {
-      const data = (
-        await axios.get(`http://localhost:3000/api/list/${params.slug}`)
-      ).data.data;
+      const data = (await axios.get(`${API_URL}/api/list/${params.slug}`)).data
+        .data;
       console.log(data);
       setData(data);
     };

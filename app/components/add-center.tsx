@@ -1,6 +1,6 @@
 "use client";
 
-import { Center, PropertyColours, toTitleCase } from "@/common";
+import { API_URL, Center, PropertyColours, toTitleCase } from "@/common";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -21,7 +21,7 @@ export default function AddCenter() {
   const goBack = () => router.back();
 
   const submitHandler = async () => {
-    await axios.post(`http://localhost:3000/api/add/${slug}`, data);
+    await axios.post(`${API_URL}/api/add/${slug}`, data);
     router.replace(`/home/view/${slugWithS}`);
   };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  API_URL,
   Center,
   OptionsDataForRecord,
   PropertyColours,
@@ -35,7 +36,7 @@ export default function AddRecord() {
   useEffect(() => {
     const fn = async () => {
       const requestData: OptionsDataForRecord = (
-        await axios.get("http://localhost:3000/api/options/records")
+        await axios.get(`${API_URL}/api/options/records`)
       ).data.data;
       console.log(requestData);
       setOptionsData(requestData);
@@ -53,7 +54,7 @@ export default function AddRecord() {
   const goBack = () => router.back();
 
   const submitHandler = async () => {
-    await axios.post(`http://localhost:3000/api/add/${slug}`, data);
+    await axios.post(`${API_URL}/api/add/${slug}`, data);
     router.replace(`/home/view/${slugWithS}`);
   };
 

@@ -1,5 +1,6 @@
 export const ADMIN_EMAIL = "admin@immunaware.com";
-export const ADMIN_PASSWORD = "admin"
+export const ADMIN_PASSWORD = "admin";
+export const API_URL = "https://immunaware-rb.vercel.app";
 
 export type Counts = {
 	centers?: Number;

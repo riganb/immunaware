@@ -1,4 +1,5 @@
 import {
+  API_URL,
   PropsList,
   toTitleCase,
   UserHistoryData,
@@ -13,7 +14,7 @@ export default async function Wrong({
   searchParams: { aadhar: string };
 }) {
   const userData: UserHistoryData = (
-    await axios.get(`http://localhost:3000/api/userdata/${searchParams.aadhar}`)
+    await axios.get(`${API_URL}/api/userdata/${searchParams.aadhar}`)
   ).data.data;
   return (
     <>
