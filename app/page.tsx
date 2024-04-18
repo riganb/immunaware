@@ -15,9 +15,9 @@ export default async function Page() {
         <div className="text-blue-700 drop-shadow-[0_25px_25px_#0097a7]">
           ImmunAWARE
         </div>
-        <marquee className="text-xl mt-16">
+        <div className="text-xl mt-16">
           The 2024 Vaccination Management System
-        </marquee>
+        </div>
       </div>
       <div className="flex flex-col items-center justify-center flex-1">
         <form
